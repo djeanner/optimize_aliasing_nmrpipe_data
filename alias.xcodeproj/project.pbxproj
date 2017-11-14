@@ -1,0 +1,243 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		130F8B86001BDB6411CA292A /* MyEventListener.java in Sources */ = {isa = PBXBuildFile; fileRef = 00E68290FEC88D7311DB9C8B /* MyEventListener.java */; };
+		130F8B8A001BDB6411CA292A /* example2.html in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00E68291FEC88ED911DB9C8B /* example2.html */; };
+		713FA84D0BA97EED00276003 /* DisplayParam.java in Sources */ = {isa = PBXBuildFile; fileRef = 713FA84C0BA97EED00276003 /* DisplayParam.java */; };
+		71C46B080BA93A17001818B2 /* Dim.java in Sources */ = {isa = PBXBuildFile; fileRef = 71C46B070BA93A17001818B2 /* Dim.java */; };
+		71EA7B820BA071C600BC2E89 /* ControlWindow.java in Sources */ = {isa = PBXBuildFile; fileRef = 71EA7B810BA071C600BC2E89 /* ControlWindow.java */; };
+		71EA7B8E0BA0720B00BC2E89 /* MyEvent.java in Sources */ = {isa = PBXBuildFile; fileRef = 71EA7B8D0BA0720B00BC2E89 /* MyEvent.java */; };
+		71F1F3980C3958C10063B3DF /* Cosa.java in Sources */ = {isa = PBXBuildFile; fileRef = 71F1F3970C3958C10063B3DF /* Cosa.java */; };
+		71F4B7670BA83C410032EFD6 /* DisplayWindow.java in Sources */ = {isa = PBXBuildFile; fileRef = 71F4B7660BA83C410032EFD6 /* DisplayWindow.java */; };
+		71F9B8C70B9D77A10012FF0E /* alias.java in Sources */ = {isa = PBXBuildFile; fileRef = 71F9B8C60B9D77A10012FF0E /* alias.java */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		130F8B89001BDB6411CA292A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				130F8B8A001BDB6411CA292A /* example2.html in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		00E68290FEC88D7311DB9C8B /* MyEventListener.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = MyEventListener.java; sourceTree = "<group>"; };
+		00E68291FEC88ED911DB9C8B /* example2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = example2.html; sourceTree = "<group>"; };
+		329C72810360BFA200C91783 /* alias.jar */ = {isa = PBXFileReference; explicitFileType = archive.jar; includeInIndex = 0; path = alias.jar; sourceTree = BUILT_PRODUCTS_DIR; };
+		713FA84C0BA97EED00276003 /* DisplayParam.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = DisplayParam.java; sourceTree = "<group>"; };
+		71C46B070BA93A17001818B2 /* Dim.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = Dim.java; sourceTree = "<group>"; };
+		71EA7B810BA071C600BC2E89 /* ControlWindow.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = ControlWindow.java; sourceTree = "<group>"; };
+		71EA7B8D0BA0720B00BC2E89 /* MyEvent.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MyEvent.java; sourceTree = "<group>"; };
+		71F1F3970C3958C10063B3DF /* Cosa.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = Cosa.java; sourceTree = "<group>"; };
+		71F4B7660BA83C410032EFD6 /* DisplayWindow.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = DisplayWindow.java; sourceTree = "<group>"; };
+		71F9B8C60B9D77A10012FF0E /* alias.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = alias.java; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		130F8B88001BDB6411CA292A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00E6828FFEC88D1A11DB9C8B = {
+			isa = PBXGroup;
+			children = (
+				71F1F3970C3958C10063B3DF /* Cosa.java */,
+				713FA84C0BA97EED00276003 /* DisplayParam.java */,
+				71F4B7660BA83C410032EFD6 /* DisplayWindow.java */,
+				71C46B070BA93A17001818B2 /* Dim.java */,
+				00E68290FEC88D7311DB9C8B /* MyEventListener.java */,
+				71EA7B8D0BA0720B00BC2E89 /* MyEvent.java */,
+				71EA7B810BA071C600BC2E89 /* ControlWindow.java */,
+				00E68291FEC88ED911DB9C8B /* example2.html */,
+				71F9B8C60B9D77A10012FF0E /* alias.java */,
+				0120612AFEC8923411DB9C8B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0120612AFEC8923411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				329C72810360BFA200C91783 /* alias.jar */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXJavaArchiveBuildPhase section */
+		130F8B87001BDB6411CA292A /* JavaArchive */ = {
+			isa = PBXJavaArchiveBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXJavaArchiveBuildPhase section */
+
+/* Begin PBXProject section */
+		00E6828EFEC88D1A11DB9C8B /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 4D9D60760B6E37BD008FB510 /* Build configuration list for PBXProject "alias" */;
+			compatibilityVersion = "Xcode 2.4";
+			hasScannedForEncodings = 1;
+			mainGroup = 00E6828FFEC88D1A11DB9C8B;
+			productRefGroup = 0120612AFEC8923411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				130F8B84001BDB6411CA292A /* alias */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		130F8B85001BDB6411CA292A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				130F8B86001BDB6411CA292A /* MyEventListener.java in Sources */,
+				71F9B8C70B9D77A10012FF0E /* alias.java in Sources */,
+				71EA7B820BA071C600BC2E89 /* ControlWindow.java in Sources */,
+				71EA7B8E0BA0720B00BC2E89 /* MyEvent.java in Sources */,
+				71F4B7670BA83C410032EFD6 /* DisplayWindow.java in Sources */,
+				71C46B080BA93A17001818B2 /* Dim.java in Sources */,
+				713FA84D0BA97EED00276003 /* DisplayParam.java in Sources */,
+				71F1F3980C3958C10063B3DF /* Cosa.java in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXToolTarget section */
+		130F8B84001BDB6411CA292A /* alias */ = {
+			isa = PBXToolTarget;
+			buildConfigurationList = 4D9D60720B6E37BD008FB510 /* Build configuration list for PBXToolTarget "alias" */;
+			buildPhases = (
+				130F8B85001BDB6411CA292A /* Sources */,
+				130F8B87001BDB6411CA292A /* JavaArchive */,
+				130F8B88001BDB6411CA292A /* Frameworks */,
+				130F8B89001BDB6411CA292A /* CopyFiles */,
+			);
+			dependencies = (
+			);
+			name = alias;
+			productInstallPath = /usr/local/bin;
+			productName = JavaAWTApplet;
+			productReference = 329C72810360BFA200C91783 /* alias.jar */;
+		};
+/* End PBXToolTarget section */
+
+/* Begin XCBuildConfiguration section */
+		4D9D60730B6E37BD008FB510 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				JAVA_ARCHIVE_CLASSES = YES;
+				JAVA_ARCHIVE_COMPRESSION = NO;
+				JAVA_ARCHIVE_TYPE = JAR;
+				JAVA_COMPILER = /usr/bin/javac;
+				JAVA_SOURCE_SUBDIR = .;
+				PRODUCT_NAME = alias;
+				PURE_JAVA = YES;
+				REZ_EXECUTABLE = YES;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		4D9D60740B6E37BD008FB510 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				JAVA_ARCHIVE_CLASSES = YES;
+				JAVA_ARCHIVE_COMPRESSION = NO;
+				JAVA_ARCHIVE_TYPE = JAR;
+				JAVA_COMPILER = /usr/bin/javac;
+				JAVA_SOURCE_SUBDIR = .;
+				PRODUCT_NAME = alias;
+				PURE_JAVA = YES;
+				REZ_EXECUTABLE = YES;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		4D9D60750B6E37BD008FB510 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				JAVA_ARCHIVE_CLASSES = YES;
+				JAVA_ARCHIVE_COMPRESSION = NO;
+				JAVA_ARCHIVE_TYPE = JAR;
+				JAVA_COMPILER = /usr/bin/javac;
+				JAVA_SOURCE_SUBDIR = .;
+				PRODUCT_NAME = alias;
+				PURE_JAVA = YES;
+				REZ_EXECUTABLE = YES;
+			};
+			name = Default;
+		};
+		4D9D60770B6E37BD008FB510 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		4D9D60780B6E37BD008FB510 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		4D9D60790B6E37BD008FB510 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4D9D60720B6E37BD008FB510 /* Build configuration list for PBXToolTarget "alias" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D9D60730B6E37BD008FB510 /* Debug */,
+				4D9D60740B6E37BD008FB510 /* Release */,
+				4D9D60750B6E37BD008FB510 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		4D9D60760B6E37BD008FB510 /* Build configuration list for PBXProject "alias" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D9D60770B6E37BD008FB510 /* Debug */,
+				4D9D60780B6E37BD008FB510 /* Release */,
+				4D9D60790B6E37BD008FB510 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 00E6828EFEC88D1A11DB9C8B /* Project object */;
+}

@@ -1,0 +1,637 @@
+<HTML>
+<HEAD>
+<TITLE>Simple Swing Applet Example</TITLE>
+<style type="text/css">
+
+#hintbox{ /*CSS for pop up hint box */
+position:absolute;
+top: 0;
+background-color: lightyellow;
+width: 150px; /*Default width of hint.*/ 
+padding: 3px;
+border:1px solid black;
+font:normal 11px Verdana;
+line-height:18px;
+z-index:100;
+border-right: 3px solid black;
+border-bottom: 3px solid black;
+visibility: hidden;
+}
+
+.hintanchor{ /*CSS for link that shows hint onmouseover*/
+font-weight: bold;
+color: navy;
+margin: 3px 8px;
+}
+
+</style>
+
+<script type="text/javascript">
+
+/***********************************************
+* Show Hint script- ¬© Dynamic Drive (www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit http://www.dynamicdrive.com/ for this script and 100s more.
+***********************************************/
+		
+var horizontal_offset="9px" //horizontal offset of hint box from anchor link
+
+/////No further editting needed
+
+var vertical_offset="0" //horizontal offset of hint box from anchor link. No need to change.
+var ie=document.all
+var ns6=document.getElementById&&!document.all
+
+function getposOffset(what, offsettype){
+var totaloffset=(offsettype=="left")? what.offsetLeft : what.offsetTop;
+var parentEl=what.offsetParent;
+while (parentEl!=null){
+totaloffset=(offsettype=="left")? totaloffset+parentEl.offsetLeft : totaloffset+parentEl.offsetTop;
+parentEl=parentEl.offsetParent;
+}
+return totaloffset;
+}
+
+function iecompattest(){
+return (document.compatMode && document.compatMode!="BackCompat")? document.documentElement : document.body
+}
+
+function clearbrowseredge(obj, whichedge){
+var edgeoffset=(whichedge=="rightedge")? parseInt(horizontal_offset)*-1 : parseInt(vertical_offset)*-1
+if (whichedge=="rightedge"){
+var windowedge=ie && !window.opera? iecompattest().scrollLeft+iecompattest().clientWidth-30 : window.pageXOffset+window.innerWidth-40
+dropmenuobj.contentmeasure=dropmenuobj.offsetWidth
+if (windowedge-dropmenuobj.x < dropmenuobj.contentmeasure)
+edgeoffset=dropmenuobj.contentmeasure+obj.offsetWidth+parseInt(horizontal_offset)
+}
+else{
+var windowedge=ie && !window.opera? iecompattest().scrollTop+iecompattest().clientHeight-15 : window.pageYOffset+window.innerHeight-18
+dropmenuobj.contentmeasure=dropmenuobj.offsetHeight
+if (windowedge-dropmenuobj.y < dropmenuobj.contentmeasure)
+edgeoffset=dropmenuobj.contentmeasure-obj.offsetHeight
+}
+return edgeoffset
+}
+
+function showhint(menucontents, obj, e, tipwidth){
+if ((ie||ns6) && document.getElementById("hintbox")){
+dropmenuobj=document.getElementById("hintbox")
+dropmenuobj.innerHTML=menucontents
+dropmenuobj.style.left=dropmenuobj.style.top=-500
+if (tipwidth!=""){
+dropmenuobj.widthobj=dropmenuobj.style
+dropmenuobj.widthobj.width=tipwidth
+}
+dropmenuobj.x=getposOffset(obj, "left")
+dropmenuobj.y=getposOffset(obj, "top")
+dropmenuobj.style.left=dropmenuobj.x-clearbrowseredge(obj, "rightedge")+obj.offsetWidth+"px"
+dropmenuobj.style.top=dropmenuobj.y-clearbrowseredge(obj, "bottomedge")+"px"
+dropmenuobj.style.visibility="visible"
+obj.onmouseout=hidetip
+}
+}
+
+function hidetip(e){
+dropmenuobj.style.visibility="hidden"
+dropmenuobj.style.left="-500px"
+}
+
+function createhintbox(){
+var divblock=document.createElement("div")
+divblock.setAttribute("id", "hintbox")
+document.body.appendChild(divblock)
+}
+
+if (window.addEventListener)
+window.addEventListener("load", createhintbox, false)
+else if (window.attachEvent)
+window.attachEvent("onload", createhintbox)
+else if (document.getElementById)
+window.onload=createhintbox
+
+function updates()  
+{ 
+	var strtabl="";
+	if(document.prepare.submit.value.indexOf("Not") != -1)  {document.prepare.submit.value+="!";}
+	else {
+
+				for (i = 0; i < document.prepare.data1.value.split("\n").length-1 ;i++) {
+
+							strtabl+=parseFloat(document.prepare.data1.value.split("\n")[i])+" ";
+							if (document.prepare.mode.value == 1) strtabl+=(0.5*parseFloat(document.prepare.data3.value.split("\n")[i]))+" ";
+							else strtabl+=(0.5*parseFloat(document.prepare.data3.value))+" ";
+							strtabl+=document.prepare.data3b.value.split("\n")[i]+"\n";
+				}
+		if(strtabl.indexOf("NaN") != -1) document.prepare.submit.value="Problem with some values...";
+		else{
+				document.simplealiasname.setSfo(document.prepare.larmor.value); 
+
+		        document.simplealiasname.setData(strtabl);
+		}
+	}
+} 
+function update2()  
+{ 
+				var ppm=[0.0,0.0,0.0,0.0];
+				var lw=[0.0,0.0,0.0,0.0];
+				var hppm1=[0.0,0.0,0.0,0.0];
+				var hppm2=[0.0,0.0,0.0,0.0];
+				var i=0;
+				for (i = 0; i < document.prepare.data2.value.split("\n").length-1 ;i++) {
+					ppm[i]= parseFloat(document.prepare.data1.value.split("\n")[i]);
+					if (document.prepare.mode.value == 1) lw[i]=(0.5*parseFloat(document.prepare.data3.value.split("\n")[i]));
+							else lw[i]=(0.5*parseFloat(document.prepare.data3.value));
+					hppm1[i]= parseFloat(parseFloat(document.prepare.data1b.value.split("\n")[i]) + (parseFloat(document.prepare.data2b.value.split("\n")[i])+ parseFloat(document.prepare.addspace.value) )/(2.0*parseFloat(document.prepare.larmorb.value)));
+					hppm2[i]= parseFloat(parseFloat(document.prepare.data1b.value.split("\n")[i]) - (parseFloat(document.prepare.data2b.value.split("\n")[i])+ parseFloat(document.prepare.addspace.value) )/(2.0*parseFloat(document.prepare.larmorb.value)));
+				}
+		document.aliasname.setdata1_5(document.prepare.larmor.value,ppm,lw,hppm1,hppm2); 
+		document.aliasname.setMessag("tataiop "+hppm1); 
+}
+function update3()  
+{ 
+        document.aliasname.setMessag(document.prepare.message.value); 
+}function update4()  
+{ 
+        document.aliasname.setMessag(" number_of_dimensions "+document.prepare.number_of_dimensions.value); 
+		document.prepare.number_of_signals.value=document.prepare.number_of_dimensions.value.toUpperCase();
+}function update5()  
+{ 
+        document.aliasname.setMessag(document.prepare.number_of_signals.value); 
+} 
+function update6()  
+{ 
+				document.prepare.number_of_signals.value="  1 !"
+				document.aliasname.setMessag(document.prepare.data.value); 
+				document.prepare.number_of_signals.value="  2 !";
+				var strtable=document.prepare.data.value.split("\n");
+				document.prepare.number_of_signals.value="  12 !";
+				var ccs="";
+				document.prepare.number_of_signals.value="stoped here  13 !";
+				for (i = 1; i < strtable.length;i++)
+				{
+					document.prepare.number_of_signals.value="  1 !" + i;
+					if (strtable[i].indexOf("asd") != -1) ccs="found line "+(i+1)+" at"+strtable[i].indexOf("asd");
+				}
+				document.prepare.number_of_signals.value=ccs + "  done !";
+}
+function update_12()  
+{
+
+	update_(1);  
+	update_(2);  
+	update_(-1);  
+	update_(-2);  
+	update_bis(2);
+	update_bis(-2);
+}
+function update_(nnuu)  
+{ 
+				var c1=0;
+				var c1b=0;
+				var c1c=0;
+				var c2=0;	
+				var tmp;
+				var tmp2;
+				var tmp3;
+				var strtable=document.prepare.largew.value.split("\n");
+				var strtable2;
+				var strtable4;
+				var strtable5;
+				var ccs="";
+				var ccs2="";
+				var ccs3="";
+				var okallfloat=0;
+				var okok=0;
+				var ii=0;
+				var numline=[0,0,0,0,0,0];
+
+				for (i = 0; i < strtable.length;i++)
+				{
+
+				if(nnuu==1)  {tmp=document.prepare.keywd1.value ;}
+				if(nnuu==2)  {tmp=document.prepare.keywd2.value ;}
+				if(nnuu==-1) {tmp=document.prepare.keywd1b.value;}
+				if(nnuu==-2) {tmp=document.prepare.keywd2b.value;}
+					if (strtable[i].indexOf("VARS") != -1) {
+						strtable3=""+strtable[i]+"";
+						strtable4=strtable3.replace(new RegExp( "\\s+","g")," "); 
+						strtable2=strtable4.split(" ");
+						for(j = 0; j < strtable2.length;j++){
+							if (strtable2[j].indexOf(tmp) != -1) {
+								c1=1;
+								c1b=i+2;
+								c1c=j;ccs="i= "+i+"j= "+j+" tmp "+tmp+"";
+								break;
+							}
+						}
+					} 
+				}
+
+				ccs=" - empty ! - ";
+
+			if(c1 != 0) {
+				  ccs="";okallfloat=1;
+				  for (i = c1b+1; i < strtable.length ;i++){
+					strtable3=strtable[i];
+					if(strtable3=="") {break;}
+					strtable4=strtable3.replace(new RegExp( "\\s+","g")," ");
+					strtable6=strtable4.split(" ");
+					if(c1c < strtable6.length){
+						strtable5=strtable6[c1c];
+						tmp3 = parseFloat(strtable5);	
+						if (!isFinite(tmp3)) {okallfloat=0;ccs+=strtable5+"<-!\n";} else {ii++;ccs+=tmp3+"\n";}
+					}
+				  }
+		
+				}	
+				if(nnuu==1)  {document.prepare.data1.value=""+ccs+""; if(okallfloat==0) {document.prepare.data1.style.color = "#F00"; document.prepare.data1ok.value=""+ii;} else {document.prepare.data1.style.color = "#080";document.prepare.update.value = "Needs update ...";document.prepare.data1ok.value=""+ii;}}
+				if(nnuu==2)  {document.prepare.data2.value=""+ccs+""; if(okallfloat==0) {document.prepare.data2.style.color = "#F00"; document.prepare.data2ok.value=""+ii;} else {document.prepare.data2.style.color = "#080";document.prepare.update.value = "Needs update ...";document.prepare.data2ok.value=""+ii;}}
+				if(nnuu==-1) {document.prepare.data1b.value=""+ccs+"";if(okallfloat==0) {document.prepare.data1b.style.color = "#F00";document.prepare.data1bok.value=""+ii;}else {document.prepare.data1b.style.color = "#080";document.prepare.updateb.value = "Needs update ...";document.prepare.data1bok.value=""+ii;}}
+				if(nnuu==-2) {document.prepare.data2b.value=""+ccs+"";if(okallfloat==0) {document.prepare.data2b.style.color = "#F00";document.prepare.data2bok.value=""+ii;}else {document.prepare.data2b.style.color = "#080";document.prepare.updateb.value = "Needs update ...";document.prepare.data2bok.value=""+ii;}}
+	
+	if(document.prepare.update.value == "Update ..." && document.prepare.updateb.value == "Update ...") document.prepare.submit.value="Click to proceed to step 3 ..."; else document.prepare.submit.value="Not ready to submit...";
+
+	}
+	 <!------------------------>
+function update_bis(nnuu)  {
+			var ccs2="";
+			var ccs3="";
+			if (nnuu==2) {
+					document.prepare.data3.value="no value yet...";
+					  document.prepare.data4.value="no value yet...";
+				okok=1;
+				if (document.prepare.data2ok.value!=0 && document.prepare.mode.value == 1){ 
+						for (i = 0; i < document.prepare.data2.value.split("\n").length-1 ;i++) {
+							ccs2+=""+parseFloat(parseFloat(document.prepare.data2.value.split("\n")[i])-parseFloat(document.prepare.procwidth.value)).toFixed(2)+"";
+							ccs3+=""+parseFloat(3.14159 * (parseFloat(document.prepare.data2.value.split("\n")[i])- parseFloat(document.prepare.procwidth.value))).toFixed(2)+"";
+							if(parseFloat(document.prepare.data2.value.split("\n")[i]) < parseFloat(document.prepare.procwidth.value) ) {okok=0;ccs2+="<-!\n";} else {ccs2+="\n";}
+							if(parseFloat(document.prepare.data2.value.split("\n")[i]) < parseFloat(document.prepare.procwidth.value) ) {okok=0;ccs3+="<-!\n";} else {ccs3+="\n";}
+						} 
+					  document.prepare.data3.value=ccs2;
+					  document.prepare.data4.value=ccs3;
+						if(okok==0)  document.prepare.data3.style.color = "#F00"; else document.prepare.data3.style.color = "#080";
+						if(okok==0)  document.prepare.data4.style.color = "#F00"; else document.prepare.data4.style.color = "#080";
+						if(okok==0)	document.prepare.update.value = "Needs update ..."; else document.prepare.update.value = "Update ...";
+				}
+				if (document.prepare.mode.value == 2){
+						tmp3=parseFloat(document.prepare.natwidth.value);
+						if (isFinite(tmp3) && tmp3>0.0) {
+							document.prepare.relrate.value=(tmp3 * 3.14159);
+							document.prepare.natwidth.style.color = "#080";
+							document.prepare.data3.value=tmp3.toFixed(2)+" Hz \n(Used for all signals.)";
+							document.prepare.data4.value=(3.14159 * tmp3).toFixed(2)+" s-1 \n(Used for all signals.)";
+							document.prepare.data3.style.color = "#080";
+							document.prepare.data4.style.color = "#080";
+							document.prepare.update.value = "Update ...";
+						} else {
+							document.prepare.data4.style.color = "#F00";
+							document.prepare.data3.style.color = "#F00";
+							document.prepare.natwidth.style.color = "#F00";
+							document.prepare.data3.value="Enter positive floating point for the natural line-width!";
+							document.prepare.data4.value="no value yet...";
+							okok=0;
+							document.prepare.update.value = "Needs update ...";
+
+						}
+				}
+				if (document.prepare.mode.value == 3){
+						tmp3=parseFloat(document.prepare.relrate.value);
+						if (isFinite(tmp3) && tmp3>0.0) {
+							document.prepare.natwidth.value=(tmp3 / 3.14159);
+							document.prepare.natwidth.style.color = "#080";
+							document.prepare.data3.value=(tmp3 / 3.14159).toFixed(2)+" Hz \n(Used for all signals.)";
+							document.prepare.data4.value=(tmp3).toFixed(2)+" s-1 \n(Used for all signals.)";
+							document.prepare.data3.style.color = "#080";
+							document.prepare.data4.style.color = "#080";
+							document.prepare.update.value = "Update ...";
+						} else {
+							document.prepare.data4.style.color = "#F00";
+							document.prepare.data3.style.color = "#F00";
+							document.prepare.natwidth.style.color = "#F00";
+							document.prepare.data3.value="Enter positive floating point for the natural line-width!";
+							document.prepare.data4.value="no value yet...";
+							okok=0;
+							document.prepare.update.value = "Needs update ...";
+						}
+				}
+			}
+			
+			if (nnuu==-2){ 
+						for (i = 0; i < document.prepare.data1b.value.split("\n").length-1 ;i++) {
+							ccs3+= parseFloat(parseFloat(document.prepare.data1b.value.split("\n")[i]) + (parseFloat(document.prepare.data2b.value.split("\n")[i])+ parseFloat(document.prepare.addspace.value) )/(2.0*parseFloat(document.prepare.larmorb.value))).toFixed(4)+"";
+							ccs3+="-"+parseFloat(parseFloat(document.prepare.data1b.value.split("\n")[i]) - (parseFloat(document.prepare.data2b.value.split("\n")[i])+ parseFloat(document.prepare.addspace.value) )/(2.0*parseFloat(document.prepare.larmorb.value))).toFixed(4)+"\n";
+			} 
+					  if(ccs3.indexOf("NaN") != -1)
+					  
+								{document.prepare.data3b.value="no value yet";document.prepare.data3b.style.color = "#F00";document.prepare.updateb.value = "Needs update ...";}
+						else
+								{document.prepare.data3b.value=ccs3;document.prepare.data3b.style.color = "#080";document.prepare.updateb.value = "Update ...";}
+			}	
+						
+			if(document.prepare.update.value == "Update ..." && document.prepare.updateb.value == "Update ...") document.prepare.submit.value="Click to proceed to step 3 ..."; else document.prepare.submit.value="Not ready to submit...";
+
+} 
+
+function checkCheckBox(f){
+if (f.number_of_dimensions.value != "2sdfsddgsadgdsf" )
+{
+//////alert('number_of_dimensions not equal to 2');
+return false;
+}else
+return true;
+}
+
+function check_lar(nnuu){
+	if(nnuu==2)  if((parseFloat(document.prepare.larmor.value)+"").indexOf("NaN") != -1) document.prepare.larmor.style.color = "#F00"; else document.prepare.larmor.style.color = "#080";
+	if(nnuu==-2)  if((parseFloat(document.prepare.larmorb.value)+"").indexOf("NaN") != -1) document.prepare.larmorb.style.color = "#F00"; else document.prepare.larmorb.style.color = "#080";
+
+}
+
+function changemode(){
+	if (document.prepare.mode.value == 1) {document.prepare.data2.style.visibility="visible";document.prepare.procwidth.style.visibility="visible";document.prepare.natwidth.style.visibility="hidden" ;document.prepare.relrate.style.visibility="hidden";
+	}
+	if (document.prepare.mode.value == 2) {document.prepare.data2.style.visibility="hidden" ;document.prepare.procwidth.style.visibility="hidden" ;document.prepare.natwidth.style.visibility="visible";document.prepare.relrate.style.visibility="hidden";
+	document.prepare.data3.value="";document.prepare.data4.value="";}
+	if (document.prepare.mode.value == 3) {document.prepare.data2.style.visibility="hidden" ;document.prepare.procwidth.style.visibility="hidden" ;document.prepare.natwidth.style.visibility="hidden" ;document.prepare.relrate.style.visibility="visible";
+	document.prepare.data3.value="";document.prepare.data4.value="";}
+		update_bis(2);  
+
+}
+function huppy(f){
+alert(f.oFile1.value+" Does not work... ");
+return false;
+}
+
+//-->
+function createTarget(t){
+window.open("", t, "width=600,height=550");
+return true;
+}
+</SCRIPT>
+
+</HEAD>
+<BODY>
+
+<!-------- <FORM NAME="oForm" ACTION="repost.asp" ENCTYPE="multipart/form-data"   METHOD="post">   --------->
+<!--
+<form name="upload" onsubmit="return huppy(this)">   
+<INPUT TYPE="file" NAME="oFile1"/>
+<INPUT TYPE="submit" VALUE="Upload File" onClick="update2()" >  
+</FORM> 
+-->
+
+
+<!-- <Script Language="JavaScript">
+  document.write("Daily Earnings: ")
+  document.write(425.65 / 7.0)
+</Script> --->
+<H2>Step 1</H2>Copy/paste a NMRPipe peak-picking table of a high-resolution HSQC spectrum below and press the tabulation key.
+<form name="prepare" onsubmit="return false">   
+<!--   <form name="prepare" method="POST" action="/cgi-bin/formsubmit.pl" onsubmit="return createTarget(this.target)" target="formtarget">  -->
+<!-- TO SUBMIT A FORM IN NEW WINDOW...<form name="prepare" method="POST" action="./formsubmit.html" onsubmit="return createTarget(this.target)" target="formtarget">    -->
+
+ <textarea name="largew" value="pipe file" onchange="update_12()" rows="10" cols="100" style="font-size:10px; font-family: courier;"/> 
+REMARK ROI 2D Peak Detection System, File: NHubi2/204/204.ft
+REMARK Detection Levels: -514121 and 514121
+REMARK Detection: X(+/-1) Y(+/-1)
+REMARK Interpolation: X(+/-1) Y(+/-1)
+REMARK Noise: 53651.5, Chi2-Threshold: 1.000000e-04, Local Adjustment: None
+REMARK Position Tolerances: X(2.0) Y(2.0)
+REMARK Sinc Detect ON, Height Adjustments: X(1.200) Y(1.800)
+REMARK Sinc Detect Linewidths: X(15.0Hz) Y(0.0Hz)
+REMARK Total Peaks: 65, Good Peaks: 65, Questionable Peaks: 0
+REMARK Clusters: 56, Max Cluster Size: 3
+REMARK Parent Spectral Axis Limits:
+
+DATA  X_AXIS 1H           1   512    9.956ppm    4.706ppm
+DATA  Y_AXIS 15N          1   128  133.500ppm  100.207ppm
+
+LARMOR 600.13
+LARMOR 60.82
+
+VARS   INDEX X_AXIS Y_AXIS DX DY X_PPM Y_PPM X_HZ Y_HZ XW YW XW_HZ YW_HZ X1 X3 Y1 Y3 HEIGHT DHEIGHT VOL PCHI2 TYPE ASS CLUSTID MEMCNT
+FORMAT %5d %9.3f %9.3f %6.3f %6.3f %8.3f %8.3f %9.3f %9.3f %7.3f %7.3f %8.3f %8.3f %4d %4d %4d %4d %+e %+e %+e %.5f %d %s %4d %4d
+
+   3   104.855    30.085  0.052  0.110    8.889  127.478  5334.507  7752.981   2.906   3.714   17.918   46.763  103  106   28   32  2.352110e+06  4.103690e+04  2.387752e+07 0.00000 1 None    3    1
+   4    62.040    31.259  0.044  0.148    9.329  127.235  5598.465  7738.199   2.810   3.847   17.323   48.435   60   64   29   33  2.415982e+06  4.125200e+04  2.619924e+07 0.00000 1 None    4    1
+   5    47.671    31.860  0.070  0.120    9.476  127.111  5687.055  7730.630   2.922   3.714   18.015   46.758   46   49   30   34  2.410183e+06  4.199965e+04  2.413882e+07 0.00000 1 None    5    1
+   6    86.122    37.519  0.052  0.253    9.081  125.940  5449.998  7659.386   2.785   4.008   17.171   50.462   85   88   35   40  2.229815e+06  4.221817e+04  2.424101e+07 0.00000 1 None    6    1
+   7   144.995    41.319  0.066  0.231    8.477  125.153  5087.036  7611.531   2.876   3.814   17.731   48.018  143  146   39   43  1.676990e+06  4.135635e+04  1.668157e+07 0.00000 1 None    7    1
+   8   126.356    44.050  0.096  0.129    8.668  124.587  5201.947  7577.148   3.034   3.649   18.705   45.942  125  128   42   46  1.985272e+06  4.203023e+04  2.032029e+07 0.00000 1 None    8    1
+   9   236.091    45.090  0.080  0.192    7.541  124.372  4525.412  7564.056   2.822   3.714   17.401   46.768  235  237   43   47  1.355838e+06  4.100446e+04  1.162563e+07 0.00000 1 None    9    1
+  10   117.846    45.940  0.097  0.127    8.755  124.196  5254.411  7553.354   3.645   3.734   22.472   47.019  116  121   44   48  2.017572e+06  4.078978e+04  3.439638e+07 0.00000 1 None   10    2
+  11   163.572    46.411  0.258  0.408    8.286  124.099  4972.504  7547.425   3.433   3.711   21.162   46.730  162  165   45   48  1.107654e+06  4.279156e+04  1.111324e+07 0.00000 1 None   11    1
+  12   205.285    46.499  0.138  0.402    7.857  124.080  4715.335  7546.311   3.165   3.928   19.513   49.459  204  207   45   48  1.405914e+06  4.259285e+04  1.405679e+07 0.00000 1 None   12    1
+  13   121.137    47.510  0.085  0.272    8.722  123.871  5234.127  7533.580   3.320   3.903   20.471   49.141  119  123   45   50  1.981035e+06  4.214573e+04  2.925554e+07 0.00000 1 None   10    2
+  14   194.002    49.703  0.059  0.217    7.973  123.417  4784.902  7505.976   2.833   3.901   17.466   49.119  193  196   48   52  1.801160e+06  4.132114e+04  1.795242e+07 0.00000 1 None   13    1
+  15   141.696    50.558  0.100  0.263    8.510  123.240  5107.375  7495.210   3.149   3.910   19.414   49.234  140  144   48   53  1.962394e+06  4.247730e+04  2.579251e+07 0.00000 1 None   14    3
+  16   174.081    50.899  0.060  0.150    8.178  123.169  4907.713  7490.914   2.853   3.821   17.586   48.116  173  176   49   53  1.852804e+06  4.096732e+04  1.849559e+07 0.00000 1 None   15    1
+  17   147.123    51.707  0.089  0.194    8.455  123.002  5073.919  7480.736   3.384   3.743   20.863   47.132  145  149   50   54  1.844580e+06  4.121338e+04  2.478446e+07 0.00000 1 None   14    3
+  18   203.663    52.145  0.132  0.189    7.874  122.911  4725.337  7475.220   3.037   3.559   18.721   44.814  202  205   50   54  1.408888e+06  4.197750e+04  1.457156e+07 0.00000 1 None   16    1
+  19   135.952    53.449  0.059  0.302    8.569  122.642  5142.789  7458.809   2.899   4.223   17.875   53.173  134  138   51   56  1.944303e+06  4.161914e+04  2.433488e+07 0.00000 1 None   17    1
+  20   150.693    53.162  0.103  0.168    8.418  122.701  5051.908  7462.416   3.230   3.925   19.915   49.426  149  153   51   55  1.933652e+06  4.143552e+04  2.510919e+07 0.00000 1 None   14    3
+  21   159.340    53.757  0.143  0.231    8.329  122.578  4998.596  7454.924   3.216   3.737   19.828   47.059  158  161   52   56  1.469888e+06  4.189062e+04  1.579646e+07 0.00000 1 None   18    1
+  22   107.988    55.176  0.044  0.125    8.857  122.284  5315.193  7437.062   2.877   3.841   17.736   48.368  106  110   53   57  2.458689e+06  4.093655e+04  2.716488e+07 0.00000 1 None   19    1
+  23   188.154    56.459  0.030  0.337    8.033  122.018  4820.951  7420.897   2.866   6.375   17.668   80.266  186  190   52   60  4.052467e+06  4.094691e+04  7.404491e+07 0.00000 1 None   20    1
+  24    89.188    57.597  0.065  0.237    9.050  121.783  5431.097  7406.570   2.842   3.902   17.519   49.125   88   91   56   61  2.005512e+06  4.201797e+04  2.227910e+07 0.00000 1 None   21    2
+  25   203.609    58.511  0.136  0.411    7.874  121.593  4725.670  7395.068   2.962   3.986   18.263   50.187  202  205   57   61  1.507885e+06  4.368659e+04  1.625589e+07 0.00000 1 None   22    2
+  26   270.234    58.947  0.216  0.435    7.190  121.503  4314.918  7389.577   2.848   3.827   17.558   48.191  270  271   58   59  6.266136e+05  4.125892e+04  2.113009e+06 0.00000 1 None   23    1
+  29   206.160    61.546  0.110  0.488    7.848  120.965  4709.943  7356.857   3.031   4.340   18.686   54.640  205  207   60   63  1.305749e+06  4.206358e+04  1.128141e+07 0.00000 1 None   22    2
+  28   171.558    61.714  0.150  0.247    8.204  120.930  4923.270  7354.739   3.104   3.762   19.136   47.373  170  173   60   64  1.561179e+06  4.285995e+04  1.666909e+07 0.00000 1 None   25    1
+  27   127.855    62.018  0.053  0.116    8.653  120.867  5192.709  7350.909   2.832   3.763   17.458   47.378  126  129   60   64  2.210420e+06  4.109671e+04  2.188552e+07 0.00000 1 None   24    1
+  31    89.156    62.572  0.276  0.514    9.050  120.753  5431.295  7343.927   3.593   3.429   22.153   43.174   88   90   61   63  7.351889e+05  4.221443e+04  5.186037e+06 0.00000 1 None   21    2
+  30    74.294    62.775  0.071  0.131    9.203  120.711  5522.921  7341.371   2.998   3.642   18.484   45.863   73   76   61   65  2.387106e+06  4.183249e+04  2.403690e+07 0.00000 1 None   26    1
+  32   149.905    63.507  0.108  0.454    8.426  120.559  5056.764  7332.154   3.481   4.497   21.462   56.627  148  152   61   66  1.618055e+06  4.203615e+04  2.825195e+07 0.00000 1 None   27    2
+  34   151.977    65.838  0.068  0.173    8.405  120.077  5043.989  7302.811   3.156   4.032   19.455   50.772  150  154   63   68  1.929336e+06  4.107932e+04  2.880265e+07 0.00000 1 None   27    2
+  33   136.584    65.981  0.290  0.301    8.563  120.047  5138.893  7301.008   3.449   3.851   21.261   48.485  135  138   65   68  9.290734e+05  4.168255e+04  9.493086e+06 0.00000 1 None   28    1
+  35   182.988    67.246  0.062  0.184    8.086  119.785  4852.804  7285.087   2.943   3.820   18.147   48.092  181  184   65   69  1.863137e+06  4.112559e+04  1.885945e+07 0.00000 1 None   29    1
+  36   213.747    67.317  0.134  0.307    7.770  119.770  4663.169  7284.192   3.095   3.786   19.079   47.671  212  215   66   69  1.270256e+06  4.179955e+04  1.205731e+07 0.00000 1 None   30    1
+  38   198.180    69.870  0.096  0.176    7.930  119.242  4759.140  7252.048   3.083   3.676   19.007   46.290  197  200   68   72  1.525670e+06  4.109954e+04  1.571931e+07 0.00000 1 None   32    1
+  37    80.738    70.440  0.075  0.250    9.137  119.124  5483.192  7244.869   2.888   3.902   17.805   49.136   79   82   68   73  2.044780e+06  4.239708e+04  2.236915e+07 0.00000 1 None   31    1
+  39   250.930    71.276  0.094  0.357    7.388  118.951  4433.932  7234.338   2.756   3.979   16.988   50.101  250  252   70   73  1.099356e+06  4.123587e+04  8.670042e+06 0.00000 1 None   33    1
+  40   136.520    72.293  0.148  0.197    8.564  118.740  5139.288  7221.540   3.319   3.775   20.463   47.526  135  139   70   75  2.029548e+06  4.317762e+04  3.038333e+07 0.00000 1 None   34    2
+  42   271.759    73.749  0.157  0.456    7.174  118.439  4305.512  7203.200   2.776   3.970   17.113   49.982  271  272   73   75  8.415899e+05  4.162429e+04  4.114681e+06 0.00000 1 None   36    1
+  41   145.979    74.043  0.073  0.143    8.466  118.378  5080.968  7199.496   3.034   3.605   18.707   45.394  144  147   72   76  1.648086e+06  4.081913e+04  1.669675e+07 0.00000 1 None   35    1
+  43   140.087    75.246  0.075  0.250    8.527  118.129  5117.295  7184.352   3.158   4.413   19.470   55.567  138  142   73   78  1.831116e+06  4.104339e+04  2.725994e+07 0.00000 1 None   34    2
+  44   249.591    77.734  0.200  0.328    7.402  117.614  4442.184  7153.025   3.085   3.707   19.022   46.680  248  251   76   79  1.091354e+06  4.255996e+04  1.041560e+07 0.00000 1 None   37    1
+  45   185.339    78.714  0.123  0.226    8.062  117.411  4838.310  7140.685   3.041   3.636   18.750   45.786  184  187   77   80  1.543868e+06  4.223916e+04  1.414011e+07 0.00000 1 None   38    1
+  46   108.140    80.263  0.053  0.152    8.855  117.090  5314.252  7121.183   2.848   3.763   17.560   47.376  106  110   78   82  2.274540e+06  4.146144e+04  2.435682e+07 0.00000 1 None   39    1
+  47   130.045    81.080  0.047  0.114    8.630  116.921  5179.208  7110.894   2.905   3.804   17.912   47.902  128  132   79   83  2.359226e+06  4.090183e+04  2.619200e+07 0.00000 1 None   40    1
+  49   185.283    87.627  0.121  0.282    8.063  115.565  4838.652  7028.454   3.131   3.789   19.305   47.712  184  187   86   89  1.529147e+06  4.210442e+04  1.455238e+07 0.00000 1 None   42    1
+  48   217.329    83.460  0.174  0.419    7.733  116.428  4641.087  7080.931   3.132   3.751   19.308   47.235  216  219   82   85  1.171211e+06  4.271132e+04  1.125501e+07 0.00000 1 None   41    1
+  50   272.497    89.187  0.301  0.356    7.167  115.243  4300.964  7008.818   3.142   3.595   19.373   45.262  272  273   88   90  8.559282e+05  4.308543e+04  4.294982e+06 0.00000 1 None   43    1
+  51   127.081    90.620  0.056  0.208    8.661  114.946  5197.480  6990.774   2.929   3.902   18.058   49.129  125  129   89   93  2.165088e+06  4.162230e+04  2.461287e+07 0.00000 1 None   44    2
+  52   255.120    90.655  0.126  0.394    7.345  114.939  4408.096  6990.338   3.069   3.908   18.924   49.210  254  256   89   92  1.081953e+06  4.142519e+04  8.903587e+06 0.00000 1 None   45    1
+  53   170.380    92.090  0.131  0.173    8.216  114.641  4930.534  6972.261   3.075   3.675   18.957   46.276  169  172   90   94  1.555249e+06  4.215257e+04  1.608498e+07 0.00000 1 None   46    1
+  54   204.404    92.104  0.097  0.142    7.866  114.639  4720.770  6972.088   2.891   3.647   17.821   45.916  203  206   90   94  1.934332e+06  4.257625e+04  1.894835e+07 0.00000 1 None   47    1
+  55   231.233    92.710  0.169  0.349    7.591  114.513  4555.363  6964.454   3.123   3.646   19.252   45.910  230  232   91   94  9.847269e+05  4.165624e+04  7.872610e+06 0.00000 1 None   48    1
+  56    72.280    94.551  0.070  0.214    9.224  114.132  5535.337  6941.281   2.947   3.850   18.167   48.475   71   74   92   97  2.374574e+06  4.261223e+04  2.586861e+07 0.00000 1 None   49    1
+  57   129.692    96.196  0.087  0.179    8.634  113.791  5181.383  6920.563   2.949   3.897   18.181   49.063  128  131   94   98  1.908592e+06  4.184653e+04  2.046733e+07 0.00000 1 None   44    2
+  58   148.987    99.665  0.140  0.187    8.436  113.073  5062.423  6876.885   4.602   3.728   28.370   46.936  147  152   98  102  2.006872e+06  4.096098e+04  3.854393e+07 0.00000 1 None   50    2
+  59   151.684   100.048  0.115  0.113    8.408  112.994  5045.798  6872.070   3.569   3.600   22.003   45.324  149  154   98  102  2.123653e+06  4.122716e+04  3.586722e+07 0.00000 1 None   50    2
+  60   222.800   105.811  0.322  0.541    7.677  111.801  4607.355  6799.503   3.296   3.669   20.323   46.192  223  223  106  106  5.393033e+05  4.129628e+04  5.325488e+05 0.00000 1 None   51    1
+  61   231.811   115.218  0.223  0.621    7.585  109.853  4551.800  6681.061   2.873   3.987   17.714   50.197  232  232  115  116  5.805200e+05  4.121895e+04  1.107825e+06 0.00000 1 None   52    1
+  62   217.002   120.550  0.205  0.714    7.737  108.749  4643.099  6613.914   3.432   4.114   21.162   51.799  216  218  119  122  7.791722e+05  4.154309e+04  6.906994e+06 0.00000 1 None   53    1
+  64   210.022   121.906  0.079  0.176    7.808  108.469  4686.134  6596.849   3.088   3.856   19.041   48.558  208  212  120  124  1.583596e+06  4.079639e+04  1.905272e+07 0.00000 1 None   55    1
+  63   152.561   122.327  0.139  0.224    8.399  108.381  5040.393  6591.541   3.077   3.573   18.973   44.985  151  154  121  124  1.667542e+06  4.310728e+04  1.558217e+07 0.00000 1 None   54    1
+  65   119.007   122.907  0.077  0.161    8.743  108.261  5247.255  6584.237   3.183   3.827   19.624   48.181  117  121  121  125  1.701012e+06  4.069053e+04  2.078205e+07 0.00000 1 None   56    1
+   1   294.037    20.871  0.165  0.369    6.945  103.091  4168.165  7869.000   2.987   3.662   18.413   46.105  293  295   20   22  7.122405e+05  4.093855e+04  4.703592e+06 0.00000 1 None    1    1
+   2   190.988    25.750  0.080  0.225    8.004  102.061  4803.480  7807.563   3.013   3.771   18.576   47.479  189  192   24   28  1.489987e+06  4.104925e+04  1.541051e+07 0.00000 1 None    2    1
+</textarea> 
+
+<a href="#" class="hintanchor" onMouseover="showhint('Copy/paste here an NMR file peak picking table.', this, event, '150px')">[?]</a>
+<p>
+<input type="button" value="Click to proceed to Step 2..." onClick="update_12();"><br>
+
+
+<H2>Step 2</H2>
+
+ 	 
+
+<H3>	  Dimension to optimize (<sup>15</sup>N/<sup>13</sup>C) 	  
+Larmor frequency: <input type="text" name="larmor" value="60.1" onchange="check_lar(2)" size="10" style="font-size:10px; font-family: courier;"/> MHz</H3>
+			Relaxation properties : 
+	<select  name="mode" onChange="changemode()">
+				<option  value="1"> Calculed based on the signal widths in the F1 dimension
+				<option  value="2"> Based on a user-defined natural line-width 
+				<option  value="3"> Based on a user-defined relaxation rate 
+					</select> 
+<table>
+	  <tr><th>
+			Chem. Shifts
+	  </th><th>
+			Signal Width 
+	  </th><th>
+			Processing
+	  </th><th>
+			Natual Line width
+	  </th><th>
+			Relaxation rate
+	  </th><th>
+			<input type="text" name="data2ok" value="0" style="font-size:10px; font-family: courier; visibility: hidden" size="2" /> 
+
+	  </th></tr>
+	  	  	      <tr>
+      <th>
+			 ppm
+	  </th><th>
+			Hz
+	  </th><th>
+			Hz
+	</th><th>
+			Hz
+	</th><th>
+			s<sup>-1</sup>	 
+	</th><th><input type="text" name="data1ok" value="0" style="font-size:10px; font-family: courier; visibility: hidden" size="2"/>  
+
+	  </th></tr>
+
+	<tr>
+	  <th>
+		 <textarea name="data1" value="pipe file" onchange="update_bis(2)" rows="10"    style="font-size:10px;   font-family: courier;" cols="10"/>empty... </textarea> 
+	  </th><th>
+		<textarea name="data2" value="pipe file" onchange="update_bis(2)" rows="10" cols="10"   style="font-size:10px;   font-family: courier;"/>empty... </textarea> 
+	  </th><th>
+		<input type="text" name="procwidth" value="40" onchange="update_bis(2)" size="10" style="font-size:10px; font-family: courier;"/> 	 
+		<a href="#" class="hintanchor" onMouseover="showhint('Enter here the contribution of processing to the line width. When using cos<sup>2</sup> processing, it is close to 1.00*Number of time incrments/spectral width ---- TO VERIFY', this, event, '150px')">[?]</a>
+
+	  </th><th valign="middle">
+		<textarea name="data3" value="pipe file" onchange="update_bis(2)" rows="10" cols="10"  style="font-size:10px;   font-family: courier;"/>empty... </textarea> 
+
+	  </th><th>
+		<textarea name="data4" value="pipe file" onchange="update6()" rows="10" cols="10" disabled="false"  style="font-size:10px;   font-family: courier;"/>empty... </textarea> 
+	  </th><th>
+			<input type="button" name="update" value="Needs update ..." onClick="update_bis(2);"><br>
+
+	</th></tr>
+	      <tr>
+      <th>
+		 <input type="text" name="keywd1" value="Y_PPM" onchange="update_(1)" size="10" style="font-size:10px; font-family: courier;" />  
+		<a href="#" class="hintanchor" onMouseover="showhint('Label of the column to extract (Case sensitive)', this, event, '150px')">[?]</a>
+	  </th><th>
+		<input type="text" name="keywd2" value="YW_HZ" onchange="update_(2);update_bis(2);" size="10" style="font-size:10px; font-family: courier;"/> 	 
+		<a href="#" class="hintanchor" onMouseover="showhint('Label of the column to extract (Case sensitive). If you dont want the signal widths to be used for the estimation of the natural line width or relaxation rate, fill either the Natural line width or relaxation rate entry on the right!', this, event, '150px')">[?]</a>
+	  </th><th>
+	  </th><th>
+	  		<input type="text" name="natwidth" value="Enter here a width" onchange="update_bis(2)" size="20" style="font-size:10px; font-family: courier; visibility: hidden;color :#F00"/> 	 
+	  </th><th>
+	  		<input type="text" name="relrate" value="Enter here a rate" onchange="update_bis(2)" size="20" style="font-size:10px; font-family: courier; visibility: hidden;color :#F00"/> 	 
+	  </th></tr>
+	      <tr>	  
+
+</table>
+<H3>	  Not optimized dimension (<sup>1</sup>H) Larmor frequency <input type="text" name="larmorb" value="600.0" onchange="check_lar(-2);update_bis(-2);" size="10" style="font-size:10px; font-family: courier;"/> MHz
+</H3>
+<table>	  	      <tr>
+      <th>
+			Chem. Shifts
+	  </th><th>
+			Signal Width 
+	  </th><th>
+			Additional space
+	</th><th>
+			Chemical shift range 		</th><th>			<input type="text" value="0" name="data2bok" size="2" style="font-size:10px; font-family: courier; visibility: hidden" rows="2"/> 
+
+	  </th></tr>
+	  	  	      <tr>
+      <th>
+			 ppm
+	  </th><th>
+			Hz
+	  </th><th>
+			 Hz
+	</th><th>
+			 ppm
+	</th><th> <input type="text" name="data1bok" hidden value="0" size="2" style="font-size:10px; font-family: courier; visibility: hidden" />  
+	  </th></tr>
+
+
+	<tr>
+	  <th>	
+		 <textarea name="data1b" value="pipe file" onchange="update_bis(-2);" rows="10"    style="font-size:10px;   font-family: courier;" cols="10"/>empty... </textarea> 
+	  </th><th>
+		<textarea name="data2b" value="pipe file" onchange="update_bis(-2);" rows="10"    style="font-size:10px;   font-family: courier;" cols="10" />empty... </textarea> 
+	  </th><th>
+	  		<input type="text" name="addspace" value="1.0" onchange="update_bis(-2)" size="10" style="font-size:10px; font-family: courier;"/> 	 
+		<a href="#" class="hintanchor" onMouseover="showhint('This allows to make sure signals will be sufficiently well resolved in this dimension.  Chemical shift range = chemical shift +/- (signal width + additional space)/(2.0 * larmor frequency)', this, event, '150px')">[?]</a>
+
+	  </th><th>
+		<textarea name="data3b" value="pipe file" onchange="update6()" rows="10"    style="font-size:10px;   font-family: courier;" cols="20" />empty... </textarea> 
+
+	  </th><th>			<input type="button" name="updateb" value="Needs update ..." onClick="update_(-1);update_bis(-2);"><br>
+
+	  </th></tr>
+	      <tr>
+      <th>
+		 <input type="text" name="keywd1b" value="X_PPM" onchange="update_(-1);update_bis(-2);" size="10" style="font-size:10px; font-family: courier;" />  
+		<a href="#" class="hintanchor" onMouseover="showhint('Label of the column to extract (Case sensitive)', this, event, '150px')">[?]</a>
+	  </th><th>
+		<input type="text" name="keywd2b" value="XW_HZ" onchange="update_(-2);update_bis(-2);" size="10" style="font-size:10px; font-family: courier;"/> 	 
+
+		<a href="#" class="hintanchor" onMouseover="showhint('Label of the column to extract (Case sensitive)', this, event, '150px')">[?]</a>
+	  </th><th>
+
+	  </th></tr>
+</table>
+<input type="button" name="submit" value="Not ready to submit..." onClick="updates();" ><br>
+<input type="submit" name="submit2" value="Submit (to hide flag)tata" onClick="update2()">     
+<H2>Step 3</H2>
+</form>
+
+<APPLET archive="alias.jar" name="aliasname" code="alias" width=1000 height=400>
+	<param name="number_of_dimensions" value="2">
+	<param name="number_of_signals" value="11">	
+	<param name="message" value="Welcome Message from JavaScript">
+Your browser does not support Java, so nothing is displayed.
+</APPLET>
+<H4>.</H4>
+
+<APPLET archive="simplealias.jar" name="simplealiasname" code="simplealias" width=1000 height=700>
+	<param name="sfo" value="125.757789">
+
+Your browser does not support Java, so nothing is displayed.
+</APPLET>
+
+</BODY>
+</HTML>
+
